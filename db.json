@@ -1,0 +1,611 @@
+{
+  "invoices": [
+    {
+      "id": 101,
+      "customerName": "kathir",
+      "customerAddr": "enclave town",
+      "customerEmail": "kathir@gmail.com",
+      "customerPhno": 8489802617,
+      "name": "Chicken Briyani",
+      "bill_to": "Chris",
+      "status": "active",
+      "description": "Hyderabadi Style",
+      "rate": 250,
+      "date": "25/1/2022",
+      "unit": "100GB",
+      "tax_id": 982000000037049,
+      "tax_name": "Sales Tax",
+      "tax_percentage": "70%",
+      "tax_type": "Service Tax",
+      "taxValue": "10%",
+      "netAmount": "550",
+      "subTotal": "500",
+      "productArray": [
+        {
+          "productName": 982000000037049,
+          "productPrice": 250,
+          "productQty": 2,
+          "productAmount": 500
+        }
+      ]
+    },
+    {
+      "customerName": "Keerthi",
+      "address": "Sankara Street",
+      "products": [
+        null,
+        null,
+        null,
+        null
+      ],
+      "contactNo": 8489802617,
+      "email": "keerthisakthi017@gmail.com",
+      "id": 104
+    },
+    {
+      "customerName": "revathy",
+      "address": "gvh",
+      "products": [
+        null,
+        null,
+        null,
+        null
+      ],
+      "contactNo": 568789800,
+      "email": "revathy@gmail.com",
+      "id": 105
+    },
+    {
+      "customerName": null,
+      "address": null,
+      "products": [
+        null,
+        null,
+        null,
+        null
+      ],
+      "contactNo": null,
+      "email": null,
+      "id": 106
+    },
+    {
+      "customerName": null,
+      "address": null,
+      "products": [
+        null,
+        null,
+        null,
+        null
+      ],
+      "contactNo": null,
+      "email": null,
+      "id": 107
+    },
+    {
+      "customerName": "sdqwv",
+      "address": "qefwe",
+      "products": [
+        null,
+        null,
+        null,
+        null
+      ],
+      "contactNo": 231326457,
+      "email": "efaefqef",
+      "id": 108
+    },
+    {
+      "customerName": "sdv",
+      "address": "wef",
+      "contactNo": 23425,
+      "email": "qef",
+      "id": 109
+    },
+    {
+      "customerName": null,
+      "address": null,
+      "contactNo": null,
+      "email": null,
+      "id": 110
+    },
+    {
+      "customerName": null,
+      "address": null,
+      "contactNo": null,
+      "email": null,
+      "id": 111
+    },
+    {
+      "customerName": null,
+      "address": null,
+      "contactNo": null,
+      "email": null,
+      "id": 112
+    },
+    {
+      "customerName": null,
+      "address": null,
+      "contactNo": null,
+      "email": null,
+      "id": 113
+    },
+    {
+      "customerName": null,
+      "address": null,
+      "contactNo": null,
+      "email": null,
+      "id": 114
+    },
+    {
+      "customerName": null,
+      "address": null,
+      "contactNo": null,
+      "email": null,
+      "id": 115
+    },
+    {
+      "customerName": null,
+      "address": null,
+      "contactNo": null,
+      "email": null,
+      "id": 116
+    },
+    {
+      "customerName": null,
+      "address": null,
+      "contactNo": null,
+      "email": null,
+      "subTotal": null,
+      "taxValue": null,
+      "netAmount": null,
+      "id": 117
+    },
+    {
+      "customerName": null,
+      "address": null,
+      "products": {
+        "name": "keerthi",
+        "price": 23,
+        "qty": 123,
+        "amount": 123
+      },
+      "contactNo": null,
+      "email": null,
+      "subTotal": null,
+      "taxValue": null,
+      "netAmount": null,
+      "id": 118
+    },
+    {
+      "customerName": null,
+      "address": null,
+      "products": {
+        "name": "sandwitch",
+        "price": 12,
+        "qty": 123,
+        "amount": 1234
+      },
+      "contactNo": null,
+      "email": null,
+      "subTotal": null,
+      "taxValue": null,
+      "netAmount": null,
+      "id": 119
+    },
+    {
+      "customerName": null,
+      "address": null,
+      "products": {
+        "name": "chicken nuggets",
+        "price": 12,
+        "qty": 56,
+        "amount": 1244
+      },
+      "contactNo": null,
+      "email": null,
+      "subTotal": null,
+      "taxValue": null,
+      "netAmount": null,
+      "id": 120
+    },
+    {
+      "customerName": null,
+      "address": null,
+      "products": {
+        "name": "pasta",
+        "price": 12,
+        "qty": 56,
+        "amount": 1244
+      },
+      "contactNo": null,
+      "email": null,
+      "subTotal": null,
+      "taxValue": null,
+      "netAmount": null,
+      "id": 121
+    },
+    {
+      "customerName": null,
+      "address": null,
+      "products": {
+        "name": "chicken nuggets",
+        "price": 12,
+        "qty": 123,
+        "amount": 1233
+      },
+      "contactNo": null,
+      "email": null,
+      "subTotal": null,
+      "taxValue": null,
+      "netAmount": null,
+      "id": 122
+    },
+    {
+      "customerName": null,
+      "address": null,
+      "products": {
+        "name": "BRIYANI",
+        "price": 234,
+        "qty": 2356,
+        "amount": 2436
+      },
+      "contactNo": null,
+      "email": null,
+      "subTotal": null,
+      "taxValue": null,
+      "netAmount": null,
+      "id": 123
+    },
+    {
+      "customerName": null,
+      "address": null,
+      "products": [
+        {
+          "name": "zxcv",
+          "price": 23,
+          "qty": 24234,
+          "amount": 234
+        }
+      ],
+      "contactNo": null,
+      "email": null,
+      "subTotal": null,
+      "taxValue": null,
+      "netAmount": null,
+      "id": 124
+    },
+    {
+      "customerName": null,
+      "address": null,
+      "products": [
+        {
+          "name": "chicken nuggets",
+          "price": 12,
+          "qty": 234,
+          "amount": 124
+        }
+      ],
+      "contactNo": null,
+      "email": null,
+      "subTotal": null,
+      "taxValue": null,
+      "netAmount": null,
+      "id": 125
+    },
+    {
+      "customerName": null,
+      "address": null,
+      "products": [
+        {
+          "name": "wef",
+          "price": 12,
+          "qty": 24,
+          "amount": 254
+        }
+      ],
+      "contactNo": null,
+      "email": null,
+      "subTotal": null,
+      "taxValue": null,
+      "netAmount": null,
+      "id": 126
+    },
+    {
+      "customerName": null,
+      "address": null,
+      "products": [
+        {
+          "name": "ke",
+          "price": 2,
+          "qty": 9,
+          "amount": 0
+        }
+      ],
+      "contactNo": null,
+      "email": null,
+      "subTotal": null,
+      "taxValue": null,
+      "netAmount": null,
+      "id": 127
+    },
+    {
+      "customerName": null,
+      "address": null,
+      "products": [
+        {
+          "name": "sandwitch",
+          "price": "",
+          "qty": "",
+          "amount": ""
+        }
+      ],
+      "contactNo": null,
+      "email": null,
+      "subTotal": null,
+      "taxValue": null,
+      "netAmount": null,
+      "id": 128
+    },
+    {
+      "customerName": null,
+      "address": null,
+      "products": [
+        {
+          "name": "wef",
+          "price": 12,
+          "qty": 23,
+          "amount": 2345
+        }
+      ],
+      "contactNo": null,
+      "email": null,
+      "subTotal": null,
+      "taxValue": null,
+      "netAmount": null,
+      "id": 129
+    },
+    {
+      "customerName": null,
+      "address": null,
+      "products": [
+        {
+          "name": "sandwitch",
+          "price": "",
+          "qty": "",
+          "amount": ""
+        }
+      ],
+      "contactNo": null,
+      "email": null,
+      "subTotal": null,
+      "taxValue": null,
+      "netAmount": null,
+      "id": 130
+    },
+    {
+      "customerName": null,
+      "address": null,
+      "products": [
+        {
+          "name": "sandwitch",
+          "price": "",
+          "qty": "",
+          "amount": ""
+        },
+        null
+      ],
+      "contactNo": null,
+      "email": null,
+      "subTotal": null,
+      "taxValue": null,
+      "netAmount": null,
+      "id": 131
+    },
+    {
+      "customerName": null,
+      "address": null,
+      "products": [
+        {
+          "name": "chicken nuggets",
+          "price": "",
+          "qty": "",
+          "amount": ""
+        },
+        null
+      ],
+      "contactNo": null,
+      "email": null,
+      "subTotal": null,
+      "taxValue": null,
+      "netAmount": null,
+      "id": 132
+    },
+    {
+      "customerName": null,
+      "address": null,
+      "products": [
+        {
+          "name": "sandwitch",
+          "price": "",
+          "qty": "",
+          "amount": ""
+        },
+        null
+      ],
+      "contactNo": null,
+      "email": null,
+      "subTotal": null,
+      "taxValue": null,
+      "netAmount": null,
+      "id": 133
+    },
+    {
+      "customerName": null,
+      "address": null,
+      "products": [
+        {
+          "name": "chicken nuggets",
+          "price": "",
+          "qty": "",
+          "amount": ""
+        },
+        null
+      ],
+      "contactNo": null,
+      "email": null,
+      "subTotal": null,
+      "taxValue": null,
+      "netAmount": null,
+      "id": 134
+    },
+    {
+      "customerName": null,
+      "address": null,
+      "products": [
+        {
+          "name": "sd",
+          "price": "",
+          "qty": "",
+          "amount": ""
+        },
+        null
+      ],
+      "contactNo": null,
+      "email": null,
+      "subTotal": null,
+      "taxValue": null,
+      "netAmount": null,
+      "id": 135
+    },
+    {
+      "customerName": null,
+      "address": null,
+      "products": [
+        {
+          "name": "chichen",
+          "price": "",
+          "qty": "",
+          "amount": ""
+        },
+        null
+      ],
+      "contactNo": null,
+      "email": null,
+      "subTotal": null,
+      "taxValue": null,
+      "netAmount": null,
+      "id": 136
+    },
+    {
+      "customerName": null,
+      "address": null,
+      "products": [
+        {
+          "name": ""
+        }
+      ],
+      "contactNo": null,
+      "email": null,
+      "subTotal": null,
+      "taxValue": null,
+      "netAmount": null,
+      "id": 137
+    },
+    {
+      "customerName": null,
+      "address": null,
+      "products": [
+        {
+          "name": "chicken nuggets",
+          "price": 23,
+          "qty": 34,
+          "amount": 345
+        },
+        null
+      ],
+      "contactNo": null,
+      "email": null,
+      "subTotal": null,
+      "taxValue": null,
+      "netAmount": null,
+      "id": 138
+    },
+    {
+      "customerName": null,
+      "address": null,
+      "products": [
+        {
+          "name": "chicken nuggets",
+          "price": "",
+          "qty": "",
+          "amount": ""
+        },
+        null
+      ],
+      "contactNo": null,
+      "email": null,
+      "subTotal": null,
+      "taxValue": null,
+      "netAmount": null,
+      "id": 139
+    },
+    {
+      "customerName": null,
+      "address": null,
+      "products": [
+        {
+          "name": "sandwitch",
+          "price": "",
+          "qty": "",
+          "amount": ""
+        },
+        {
+          "name": "chicken nuggets",
+          "price": "",
+          "qty": "",
+          "amount": ""
+        }
+      ],
+      "contactNo": null,
+      "email": null,
+      "subTotal": null,
+      "taxValue": null,
+      "netAmount": null,
+      "id": 140
+    },
+    {
+      "customerName": null,
+      "address": null,
+      "products": [
+        {
+          "name": "chicken nuggets",
+          "price": "",
+          "qty": "",
+          "amount": ""
+        },
+        {
+          "name": "sdv",
+          "price": "",
+          "qty": "",
+          "amount": ""
+        }
+      ],
+      "contactNo": null,
+      "email": null,
+      "subTotal": null,
+      "taxValue": null,
+      "netAmount": null,
+      "id": 141
+    }
+  ],
+  "productList": [
+    {
+      "prodName": "chicken",
+      "price": 234
+    },
+    {
+      "prodName": "chicken",
+      "price": 234
+    }
+  ]
+}

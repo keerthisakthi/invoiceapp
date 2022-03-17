@@ -1,0 +1,12 @@
+.action-button .feather {
+  color: #999;
+}
+.action-button:hover .feather {
+  color: inherit;
+}
+.action-button:focus {
+    box-shadow: none;
+}
+.action-td{
+    width: 10%;;
+}
