@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { InvoiceService } from '../services/invoice.service';
 
 @Component({
   selector: 'app-list-invoice',
@@ -7,9 +9,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListInvoiceComponent implements OnInit {
 
-  constructor() { }
+  listInvoices :any;
+  constructor( private invoiceService: InvoiceService) { }
 
   ngOnInit(): void {
+    this.invoiceService.listInvoices().subscribe(data => {
+        this.listInvoices = data;
+    })
+    
   }
+
+  getAllInvoices(){
+    this.invoiceService.listInvoices().subscribe(data => {
+      this.listInvoices = data;
+  })
+  }
+
+  deleteInvoice(invoice:any){
+    this.invoiceService.deleteInvoice(invoice.id).subscribe(data => {
+        alert("Invoice deleted!");
+        this.getAllInvoices();
+    })
+    }
 
 }

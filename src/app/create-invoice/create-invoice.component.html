@@ -1,1 +1,210 @@
-<p>create-invoice works!</p>
+<form [formGroup]="invoiceForm" (ngSubmit)="onSubmit()">
+  <div class="card">
+    <div class="card-header">
+      Invoice
+      <strong>B123</strong>
+      <a
+        class="btn btn-sm btn-secondary float-right mr-1 d-print-none"
+        href="#"
+        onclick="javascript:window.print();"
+        data-abc="true"
+      >
+        <i class="fa fa-print"></i> Print</a
+      >
+      <a
+        class="btn btn-sm btn-info float-right mr-1 d-print-none"
+        href="#"
+        data-abc="true"
+      >
+        <i class="fa fa-save"></i> Save</a
+      >
+    </div>
+    <div class="card-body">
+      <div class="row mb-4">
+        <div class="col-sm-6">
+          <h6 class="mb-3">From:</h6>
+          <div>
+            <strong>Keerthi Restaurant</strong>
+          </div>
+          <div>42, Awesome Enclave</div>
+          <div>Virudhunagar,</div>
+          <div>Email: Keerthisakthi017@gmail.com</div>
+          <div>Phone: 8489802617</div>
+        </div>
+        
+            <div class="col-sm-6">
+             
+              <h6 class="mb-3">Bill To:</h6>
+              <div class="input-container">
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="customerName"
+                  id="name"
+                  placeholder="Customer name"
+                />
+              </div>
+              <div class="input-container">
+                <textarea
+                  class="form-control"
+                  formControlName="customerAddr"
+                  id="address"
+                  placeholder="Address"
+                  row="3"
+                ></textarea>
+              </div>
+              <div class="input-container">
+                <input
+                  type="email"
+                  class="form-control"
+                  formControlName="customerEmail"
+                  id="email"
+                  placeholder="Email"
+                />
+              </div>
+              <div class="input-container">
+                <input
+                  type="number"
+                  class="form-control"
+                  formControlName="customerPhno"
+                  id="contactNo"
+                  placeholder="Contact no"
+                />
+              </div>
+            </div>
+         
+      </div>
+
+      <div class="card border-secondary mt-2">
+        <div class="card-body">
+          <h4 class="card-title d-flex justify-content-between">
+            Order Details
+            <button
+              type="button"
+              class="btn btn-secondary"
+              (click)="addProduct()"
+            >
+              +
+            </button>
+          </h4>
+         
+          <div class="row form-group" formArrayName="productArray">
+            <table class="table table-responsive-sm">
+              <thead>
+                <tr>
+                  <th width="25%">Product</th>
+                  <th width="25%">Price</th>
+                  <th width="25%">Quantity</th>
+                  <th width="25%">Amount</th>
+                  <th width="25%">action</th>
+                </tr>
+              </thead>
+              
+              <tbody *ngFor="let control of productFormGroups.controls; let i=index" [formGroupName]="i">
+                <tr>
+                  <td>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="productname"
+                      formControlName="productName"
+                      required
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="number"
+                      class="form-control"
+                      formControlName="productPrice"
+                      id="price"
+                      
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="number"
+                      class="form-control"
+                      formControlName="productQty"
+                      id="quantity"
+                   />
+                  </td>
+                  <td>
+                    <input
+                      type="number"
+                      class="form-control"
+                      formControlName="productAmount"
+                      id="amount"
+                                
+                      />
+                  </td>
+                  <td>
+                    <button class="btn" (click)="removeRow(i)">
+                      <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"  stroke-linejoin="round" class="css-i6dzq1">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="15" y1="9" x2="9" y2="15"></line>
+                        <line x1="9" y1="9" x2="15" y2="15"></line>
+                      </svg>
+                    </button>
+                  </td>
+                </tr>
+                
+              </tbody>
+
+            </table>
+          </div>
+            
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-4 col-sm-5">
+          <i>It was great doing business with you!</i>
+        </div>
+        <div class="col-lg-4 col-sm-5 ml-auto">
+          <table class="table table-clear table-responsive-sm">
+            <tbody>
+              <tr>
+                <td class="left">
+                  <strong>Subtotal</strong>
+                </td>
+                <td class="right"> <input
+                  type="number"
+                  class="form-control"
+                  formControlName="subTotal"
+                  id="subtotal"
+               /></td>
+              </tr>
+
+              <tr>
+                <td class="left">
+                  <strong>Tax (10%)</strong>
+                </td>
+                <td class="right"> <input
+                  type="number"
+                  class="form-control"
+                  formControlName="taxValue"
+                  id="taxValue"
+               /></td>
+              </tr>
+              <tr>
+                <td class="left">
+                  <strong>Total</strong>
+                </td>
+                <td class="right">
+                  <strong> <input
+                    type="number"
+                    class="form-control"
+                    formControlName="netAmount"
+                    id="netAmount"
+                 /></strong>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <button type="submit" class="btn btn-success" (click)="postInvoiceDetails()">
+            Create Invoice
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

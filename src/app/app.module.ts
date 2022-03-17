@@ -1,4 +1,4 @@
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
@@ -8,8 +8,8 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import { CreateInvoiceComponent } from './create-invoice/create-invoice.component';
 import { ListInvoiceComponent } from './list-invoice/list-invoice.component';
 import { AppRoutingModule } from './app-routing.module';
-
-
+import {HttpClientModule} from '@angular/common/http';
+import {ReactiveFormsModule,FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -23,12 +23,13 @@ import { AppRoutingModule } from './app-routing.module';
     BrowserAnimationsModule,
     MatToolbarModule,
     MatSidenavModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    FormsModule,
+    
   ],
   providers: [],
   bootstrap: [AppComponent],
-  schemas:[
-    CUSTOM_ELEMENTS_SCHEMA
-  ]
-})
+  })
 export class AppModule { }

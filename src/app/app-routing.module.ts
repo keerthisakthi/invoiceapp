@@ -7,7 +7,7 @@ import { AppComponent } from './app.component';
 
 
 const routes: Routes =[
-  
+  {path:'',component: CreateInvoiceComponent},
   {path:'create-invoice',component: CreateInvoiceComponent},
   {path:'list-invoice',component: ListInvoiceComponent},
 ];
