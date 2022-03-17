@@ -30,32 +30,6 @@
       ]
     },
     {
-      "customerName": "Keerthi",
-      "address": "Sankara Street",
-      "products": [
-        null,
-        null,
-        null,
-        null
-      ],
-      "contactNo": 8489802617,
-      "email": "keerthisakthi017@gmail.com",
-      "id": 104
-    },
-    {
-      "customerName": "revathy",
-      "address": "gvh",
-      "products": [
-        null,
-        null,
-        null,
-        null
-      ],
-      "contactNo": 568789800,
-      "email": "revathy@gmail.com",
-      "id": 105
-    },
-    {
       "customerName": null,
       "address": null,
       "products": [
@@ -93,13 +67,6 @@
       "contactNo": 231326457,
       "email": "efaefqef",
       "id": 108
-    },
-    {
-      "customerName": "sdv",
-      "address": "wef",
-      "contactNo": 23425,
-      "email": "qef",
-      "id": 109
     },
     {
       "customerName": null,
@@ -596,16 +563,134 @@
       "taxValue": null,
       "netAmount": null,
       "id": 141
+    },
+    {
+      "customerName": null,
+      "address": null,
+      "products": [
+        {
+          "name": "chicken 64",
+          "price": "",
+          "qty": "",
+          "amount": ""
+        },
+        {
+          "name": "coco",
+          "price": "",
+          "qty": "",
+          "amount": ""
+        }
+      ],
+      "contactNo": null,
+      "email": null,
+      "subTotal": null,
+      "taxValue": null,
+      "netAmount": null,
+      "id": 142
+    },
+    {
+      "products": [
+        {
+          "name": "chicken",
+          "price": "12",
+          "qty": 234,
+          "amount": 2690
+        }
+      ],
+      "customerName": null,
+      "address": null,
+      "contactNo": null,
+      "email": null,
+      "subTotal": null,
+      "taxValue": null,
+      "netAmount": null,
+      "id": 143
+    },
+    {
+      "products": [
+        {
+          "name": "chicken nuggets",
+          "price": "12",
+          "qty": 12,
+          "amount": 12
+        },
+        {
+          "name": "chicken",
+          "price": "12",
+          "qty": 12,
+          "amount": 12
+        }
+      ],
+      "customerName": null,
+      "address": null,
+      "contactNo": null,
+      "email": null,
+      "subTotal": null,
+      "taxValue": null,
+      "netAmount": null,
+      "id": 144
+    },
+    {
+      "products": [
+        {
+          "name": "",
+          "price": "",
+          "qty": "",
+          "amount": ""
+        }
+      ],
+      "customerName": null,
+      "address": null,
+      "contactNo": null,
+      "email": null,
+      "subTotal": null,
+      "taxValue": null,
+      "netAmount": null,
+      "billDate": "2022-03-17",
+      "id": 145
+    },
+    {
+      "products": [],
+      "customerName": null,
+      "address": null,
+      "contactNo": null,
+      "email": null,
+      "subTotal": null,
+      "taxValue": null,
+      "netAmount": null,
+      "billDate": null,
+      "id": 146
+    },
+    {
+      "products": [
+        {
+          "name": "",
+          "price": "",
+          "qty": "",
+          "amount": ""
+        }
+      ],
+      "customerName": null,
+      "address": null,
+      "contactNo": null,
+      "email": null,
+      "subTotal": null,
+      "taxValue": null,
+      "netAmount": null,
+      "billDate": null,
+      "id": 147
     }
   ],
   "productList": [
     {
+      "id": 1,
       "prodName": "chicken",
-      "price": 234
+      "price": 250
     },
     {
-      "prodName": "chicken",
-      "price": 234
+      "id": 2,
+      "prodName": "chicken nuggets",
+      "price": 200
     }
   ]
 }
