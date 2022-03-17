@@ -21,6 +21,9 @@ export class InvoiceService {
     }))
   }
 
+
+  
+
   postInvoices(data:any){
     return this.http.post<any>('http://localhost:3000/invoices',data)
     .pipe(map((result:any)=>{
@@ -34,4 +37,11 @@ export class InvoiceService {
       return result;
   }))
 }
+
+  getProductLists(){
+    return this.http.get<any>('http://localhost:3000/productList')
+    .pipe(map((result:any)=>{
+      return result;
+    }))
+  }
 }

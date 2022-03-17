@@ -1,22 +1,15 @@
 export class Invoice {
-  customerName: string = '';
-  address: string = '';
+  customerName: string ;
+  address: string ;
   contactNo: number;
   email: string;
   subTotal: number;
   taxValue: number;
   netAmount: number;
+  billDate:number;
   products: Product[] =[];
  constructor() {
-//     //  this.products = [];
-//     console.log(this.products[0].amount)
-// // this.products.push(new Product());
-// //    console.log(this.products[0].amount)
-//     this.products = new Product();
-// console.log("hap",this.products)
-    //this.products.push(new Product())
-// console.log("hap",this.products)
-// console.log(this.products,this.products[0].name);
+
   }
 }
 

@@ -1,8 +1,8 @@
 <form [formGroup]="invoiceForm" (ngSubmit)="onSubmit()">
   <div class="card">
     <div class="card-header">
-      Invoice
-      <strong>B123</strong>
+     <strong>Invoice</strong> 
+      <!-- <strong>B123</strong> -->
       <a
         class="btn btn-sm btn-secondary float-right mr-1 d-print-none"
         href="#"
@@ -11,13 +11,7 @@
       >
         <i class="fa fa-print"></i> Print</a
       >
-      <a
-        class="btn btn-sm btn-info float-right mr-1 d-print-none"
-        href="#"
-        data-abc="true"
-      >
-        <i class="fa fa-save"></i> Save</a
-      >
+      
     </div>
     <div class="card-body">
       <div class="row mb-4">
@@ -31,48 +25,55 @@
           <div>Email: Keerthisakthi017@gmail.com</div>
           <div>Phone: 8489802617</div>
         </div>
-        
-            <div class="col-sm-6">
-             
-              <h6 class="mb-3">Bill To:</h6>
-              <div class="input-container">
-                <input
-                  type="text"
-                  class="form-control"
-                  formControlName="customerName"
-                  id="name"
-                  placeholder="Customer name"
-                />
-              </div>
-              <div class="input-container">
-                <textarea
-                  class="form-control"
-                  formControlName="customerAddr"
-                  id="address"
-                  placeholder="Address"
-                  row="3"
-                ></textarea>
-              </div>
-              <div class="input-container">
-                <input
-                  type="email"
-                  class="form-control"
-                  formControlName="customerEmail"
-                  id="email"
-                  placeholder="Email"
-                />
-              </div>
-              <div class="input-container">
-                <input
-                  type="number"
-                  class="form-control"
-                  formControlName="customerPhno"
-                  id="contactNo"
-                  placeholder="Contact no"
-                />
-              </div>
-            </div>
-         
+
+        <div class="col-sm-6">
+          <h6 class="mb-3">Bill To:</h6>
+          <div class="input-container">
+            <input
+              type="text"
+              class="form-control"
+              formControlName="customerName"
+              id="name"
+              placeholder="Customer name"
+            />
+          </div>
+          <div class="input-container">
+            <textarea
+              class="form-control"
+              formControlName="customerAddr"
+              id="address"
+              placeholder="Address"
+              row="3"
+            ></textarea>
+          </div>
+          <div class="input-container">
+            <input
+              type="email"
+              class="form-control"
+              formControlName="customerEmail"
+              id="email"
+              placeholder="Email"
+            />
+          </div>
+          <div class="input-container">
+            <input
+              type="number"
+              class="form-control"
+              formControlName="customerPhno"
+              id="contactNo"
+              placeholder="Contact no"
+            />
+          </div>
+          <div class="input-container">
+            <input
+              type="date"
+              class="p-2 billDate"
+              formControlName="billDate"
+              id="billDate"
+              placeholder="billDate"
+            />
+          </div>
+        </div>
       </div>
 
       <div class="card border-secondary mt-2">
@@ -87,7 +88,7 @@
               +
             </button>
           </h4>
-         
+
           <div class="row form-group" formArrayName="productArray">
             <table class="table table-responsive-sm">
               <thead>
@@ -99,25 +100,42 @@
                   <th width="25%">action</th>
                 </tr>
               </thead>
-              
-              <tbody *ngFor="let control of productFormGroups.controls; let i=index" [formGroupName]="i">
+
+              <tbody
+                *ngFor="
+                  let control of productFormGroups.controls;
+                  let i = index
+                "
+                [formGroupName]="i"
+              >
                 <tr>
                   <td>
-                    <input
+                    <!-- <input
                       type="text"
                       class="form-control"
                       id="productname"
                       formControlName="productName"
                       required
-                    />
+                    /> -->
+                    <select
+                      class="custom-select mb-3"
+                      (change)="changeProduct($event)"
+                      formControlName="productName"
+                    >
+                      <option value="">Select Product</option>
+                      <option *ngFor="let product of productList" [ngValue]="product.prodName">
+                        {{ product.prodName }}
+                        
+                      </option>
+                    </select>
                   </td>
                   <td>
                     <input
-                      type="number"
+                      type="text"
                       class="form-control"
                       formControlName="productPrice"
-                      id="price"
-                      
+                      id="price" 
+                      #prodprice
                     />
                   </td>
                   <td>
@@ -126,20 +144,32 @@
                       class="form-control"
                       formControlName="productQty"
                       id="quantity"
-                   />
+                      #prodqty
+                    />
                   </td>
                   <td>
-                    <input
+                    <!-- <input
                       type="number"
                       class="form-control"
                       formControlName="productAmount"
                       id="amount"
-                                
-                      />
+                    #pro
+                    /> -->
+                    <input class="form-control" formControlName="productAmount" [value]="invoiceForm.get('productQty')"/>
                   </td>
                   <td>
                     <button class="btn" (click)="removeRow(i)">
-                      <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"  stroke-linejoin="round" class="css-i6dzq1">
+                      <svg
+                        viewBox="0 0 24 24"
+                        width="24"
+                        height="24"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        fill="none"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        class="css-i6dzq1"
+                      >
                         <circle cx="12" cy="12" r="10"></circle>
                         <line x1="15" y1="9" x2="9" y2="15"></line>
                         <line x1="9" y1="9" x2="15" y2="15"></line>
@@ -147,12 +177,9 @@
                     </button>
                   </td>
                 </tr>
-                
               </tbody>
-
             </table>
           </div>
-            
         </div>
       </div>
       <div class="row">
@@ -166,41 +193,50 @@
                 <td class="left">
                   <strong>Subtotal</strong>
                 </td>
-                <td class="right"> <input
-                  type="number"
-                  class="form-control"
-                  formControlName="subTotal"
-                  id="subtotal"
-               /></td>
+                <td class="right">
+                  <input
+                    type="number"
+                    class="form-control"
+                    formControlName="subTotal"
+                    id="subtotal"
+                  />
+                </td>
               </tr>
 
               <tr>
                 <td class="left">
                   <strong>Tax (10%)</strong>
                 </td>
-                <td class="right"> <input
-                  type="number"
-                  class="form-control"
-                  formControlName="taxValue"
-                  id="taxValue"
-               /></td>
+                <td class="right">
+                  <input
+                    type="number"
+                    class="form-control"
+                    formControlName="taxValue"
+                    id="taxValue"
+                  />
+                </td>
               </tr>
               <tr>
                 <td class="left">
                   <strong>Total</strong>
                 </td>
                 <td class="right">
-                  <strong> <input
-                    type="number"
-                    class="form-control"
-                    formControlName="netAmount"
-                    id="netAmount"
-                 /></strong>
+                  <strong>
+                    <input
+                      type="number"
+                      class="form-control"
+                      formControlName="netAmount"
+                      id="netAmount"
+                  /></strong>
                 </td>
               </tr>
             </tbody>
           </table>
-          <button type="submit" class="btn btn-success" (click)="postInvoiceDetails()">
+          <button
+            type="submit"
+            class="btn btn-success"
+            (click)="postInvoiceDetails()"
+          >
             Create Invoice
           </button>
         </div>

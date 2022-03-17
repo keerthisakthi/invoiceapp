@@ -32,4 +32,7 @@
 .input-container input{
     border: 0px;
 }
+.input-container .billDate{
+    color:grey;
+}
 
