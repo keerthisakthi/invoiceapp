@@ -17,6 +17,7 @@ import { Invoice, Product } from './create-invoice.model';
 })
 export class CreateInvoiceComponent implements OnInit {
   invoiceForm: FormGroup;
+  Today: number = Date.now();
   // productlist: any = ['Florida', 'South Dakota', 'Tennessee', 'Michigan'];
   productList:any;
   // constructor(private fb: FormBuilder) {}
@@ -26,22 +27,23 @@ export class CreateInvoiceComponent implements OnInit {
   ngOnInit() {
     // this.createForm();
     this.invoiceForm = new FormGroup({
-      customerName: new FormControl(null, [Validators.required]),
-      customerAddr: new FormControl(null, [Validators.required]),
+      customerName: new FormControl(null, [Validators.required,Validators.maxLength(20),Validators.minLength(8),Validators.pattern('[a-zA-Z ]*')]),
+      customerAddr: new FormControl(null, [Validators.required,Validators.minLength(10),Validators.maxLength(30)]),
       customerEmail: new FormControl(null, [Validators.required,Validators.email]),
-      customerPhno: new FormControl(null, [Validators.required]),
+      customerPhno: new FormControl(null, [Validators.required,Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]),
       billDate:new FormControl(null,Validators.required),
       productArray: new FormArray([
         new FormGroup({
-          productName: new FormControl('', [Validators.required]),
+         // productName: new FormControl('', [Validators.required]),
+          product: new FormControl('', [Validators.required]),
           productPrice: new FormControl('', Validators.required),
           productQty: new FormControl('', Validators.required),
           productAmount: new FormControl('', Validators.required)
         })
       ]),
-      netAmount: new FormControl(null),
-      subTotal: new FormControl(null ),
-      taxValue: new FormControl(null)
+      netAmount: new FormControl(null,[Validators.required]),
+      subTotal: new FormControl(null ,[Validators.required]),
+      taxValue: new FormControl(null,[Validators.required])
       
     });
 
@@ -51,24 +53,69 @@ export class CreateInvoiceComponent implements OnInit {
       console.log(this.productList[0].prodName)
   })
   }
+  get customerName(){
+    return this.invoiceForm.get('customerName') as FormControl
+  }
+  get customerAddr(){
+    return this.invoiceForm.get('customerAddr') as FormControl
+  }
+  get customerEmail(){
+    return this.invoiceForm.get('customerEmail') as FormControl
+  }
+  get customerPhno(){
+    return this.invoiceForm.get('customerPhno') as FormControl
+  }
+  get billDate(){
+    return this.invoiceForm.get('billDate') as FormControl
+  }
+  get netAmount(){
+    return this.invoiceForm.get('netAmount') as FormControl
+  }
+  get subTotal(){
+    return this.invoiceForm.get('subTotal') as FormControl
+  }
+  get taxValue(){
+    return this.invoiceForm.get('taxValue') as FormControl
+  }
+  get product(){
+    return this.invoiceForm.get('product') as FormControl
+  }
+  get productPrice() {
 
+    return this.invoiceForm.controls['productArray'].get('productPrice') as FormControl
+    
+  }
+  get productQty(){
+    return this.invoiceForm.get('productQty') as FormControl
+    
+  }
+  get productAmount(){
+    return this.invoiceForm.get('productAmount') as FormControl
+    
+  }
+  
   get productFormGroups () {
     return this.invoiceForm.get('productArray') as FormArray
   }
+
+  
 
   invoiceModelObj: Invoice = new Invoice();
 
   addProduct(){
     
     const control = <FormArray>this.invoiceForm.controls['productArray'];
+    
     control.push(
       new FormGroup({
-        productName: new FormControl(''),
-        productPrice: new FormControl(''),
-        productQty: new FormControl(''),
-        productAmount: new FormControl('')
+        //productName: new FormControl(''),
+        product: new FormControl('',[Validators.required]),
+        productPrice: new FormControl('',[Validators.required]),
+        productQty: new FormControl('',[Validators.required]),
+        productAmount: new FormControl('',[Validators.required])
       })
     );
+    // control.get('productPrice')?.setValue('240');
   }
 
   removeRow(index: number) {
@@ -104,14 +151,15 @@ export class CreateInvoiceComponent implements OnInit {
     // console.log("prod",this.invoiceModelObj.products.length)
     // console.log("detail",arr,itemLength)
     
-    for(let i=0,j=0; i<arr.length; i++){
+    for(let i=0; i<arr.length; i++){
     //  debugger;
-      this.invoiceModelObj.products[i]= new Product(this.invoiceForm.value.productArray[i].productName, this.invoiceForm.value.productArray[i].productPrice, this.invoiceForm.value.productArray[i].productQty, this.invoiceForm.value.productArray[i].productAmount);
-      
-   
+      this.invoiceModelObj.products[i]= new Product(
+        this.invoiceForm.value.productArray[i].product, 
+        this.invoiceForm.value.productArray[i].productPrice, 
+        this.invoiceForm.value.productArray[i].productQty, 
+        this.invoiceForm.value.productArray[i].productAmount
+        );
   }
-    
-  
 
     this.invoiceService.postInvoices(this.invoiceModelObj).subscribe(data =>{
       console.log(data);
@@ -122,12 +170,85 @@ export class CreateInvoiceComponent implements OnInit {
      })
   }
 
-  changeProduct(e: any) {
-    this.invoiceForm.get('productName')?.setValue(e.target.value, {
-      onlySelf: true,
-    });
+  changeProduct(e: any,index:number) {
+    console.log("price",e.target.value);
+    const priceValue=this.invoiceForm.value.productArray[index].product.price;
+    const prodControl=(<FormArray>this.invoiceForm.controls['productArray']).at(index);
+    prodControl.get('productPrice')?.setValue(priceValue);
+    // this.invoiceForm.controls['productArray'].get('productPrice')?.setValue("20", {
+    //     onlySelf: true,
+    //   });
+
+      // const faControl = 
+      // (<FormArray>this.pmForm.controls['bundleDetails']).at(index);
+      // faControl['controls'].bsku.setValue(sku);
+     
+    // this.invoiceForm.get('productArray').patchValue(e.target.value);
+    // this.invoiceForm.get('productPrice')?.setValue('20');
+    // this.invoiceForm.controls['prouctArray'].get('productPrice')?.setValue('25');
+    // console.log(this.invoiceForm.controls.productFormGroups)
+    //  this.invoiceForm.controls['prouctArray'].get('productPrice')?.setValue(25);
+    //     onlySelf: true,
+    //   });
+    // this.Price = e.target.value
+    // debugger;
+    // this.invoiceForm.get('productName')?.setValue(e.target.value, {
+    //   onlySelf: true,
+    // });
+    // this.invoiceForm.value.productArray[0].product.price=1000;
+    // this.invoiceForm.value.productArray[0].productprice=1000;
+
+    // const control = <FormArray>this.invoiceForm.controls['productArray'];
+    
+    // control.push(
+    //   new FormGroup({
+    //     //productName: new FormControl(''),
+    //     product: new FormControl(''),
+    //     productPrice: new FormControl('2'),
+    //     productQty: new FormControl(''),
+    //     productAmount: new FormControl('')
+    //   })
+    // );
+    // this.invoiceForm.value.subTotal=20;
+    // console.log("event",this.invoiceForm.value('subTotal'))
+    //  this.invoiceForm.value.productArray[0].productPrice=this.invoiceForm.value.productArray[0].product.price;
+    //  console.log("hi",this.invoiceForm.value.productArray[0].productPrice)
+    //  this.invoiceForm.value('subTotal')?.setValue(20)
+    // .setValue(this.invoiceForm.value.productArray[0].productPrice,
+    //   {
+    //   onlySelf: true,
+    // }
+    // );
+   //console.log("price",this.invoiceForm.controls['prouctArray'],this.invoiceForm.controls['productArray'],this.invoiceForm.get('productPrice'),this.invoiceForm.value.productArray[0].product.price)
   }
-  get productName() {
-    return this.invoiceForm.get('productName');
+  // get product() {
+
+  //   return this.invoiceForm.get('product');
+    
+  // }
+  
+  
+  calculateAmount(index: number){
+    // console.log("price",e.target.value);
+    // const priceValue=this.invoiceForm.value.productArray[index].product.price;
+    // const prodControl=(<FormArray>this.invoiceForm.controls['productArray']).at(index);
+    // prodControl.get('productPrice')?.setValue(priceValue);
+    const total = this.invoiceForm.value.productArray[index].productPrice * this.invoiceForm.value.productArray[index].productQty;
+    const amountControl=(<FormArray>this.invoiceForm.controls['productArray']).at(index);
+    amountControl.get('productAmount')?.setValue(total);
+    // const total = this.invoiceForm.value.productArray[index].productPrice * this.invoiceForm.value.productArray[index].productQty;
+    //  this.invoiceForm.value.productArray[index].get('productAmount').setValue(total);
+    // this.invoiceForm.controls['productArray'].value.productAmount.setValue(total);
+    // this.invoiceForm.value.productArray[index].productAmount=total;
+    // console.log(this.invoiceForm)
+    //debugger;
+    // const total= this.invoiceForm
+    // .get('productQty')?.value * this.invoiceForm.get('productPrice')?.value;
+    // console.log("v",total,this.invoiceForm
+    // .get('productQty')?.value)
   }
+  
 }
+// (this.form.get('controls') as FormArray).at(index) as FormGroup).get('description').patchValue(item.description);
+// this.invoiceForm.controls['productArray'].value
+// this.invoiceForm.controls['productArray'].controls[0].value.productPrice=this.invoiceForm.controls['productArray'].controls[0].value.product.price
