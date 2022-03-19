@@ -15,7 +15,7 @@ export class Invoice {
 
 export class Product {
 
-  name: string="";
+  name: string;
   price: number;
   qty: number ;
   amount: number;

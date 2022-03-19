@@ -1,7 +1,7 @@
 <form [formGroup]="invoiceForm" (ngSubmit)="onSubmit()">
   <div class="card">
     <div class="card-header">
-     <strong>Invoice</strong> 
+      <strong>Invoice</strong>
       <!-- <strong>B123</strong> -->
       <a
         class="btn btn-sm btn-secondary float-right mr-1 d-print-none"
@@ -11,7 +11,6 @@
       >
         <i class="fa fa-print"></i> Print</a
       >
-      
     </div>
     <div class="card-body">
       <div class="row mb-4">
@@ -24,6 +23,7 @@
           <div>Virudhunagar,</div>
           <div>Email: Keerthisakthi017@gmail.com</div>
           <div>Phone: 8489802617</div>
+          <p>Bill Date: {{ Today | date: "medium" }}</p>
         </div>
 
         <div class="col-sm-6">
@@ -36,6 +36,22 @@
               id="name"
               placeholder="Customer name"
             />
+            
+            <div
+              *ngIf="customerName.invalid && (customerName.dirty || customerName.touched)"
+              class="alert alert-danger"
+            >
+              <div *ngIf="customerName.errors?.['required']">Name is required.</div>
+              <div *ngIf="customerName.errors?.['minlength']">
+                Name must be at least 8 characters long.
+              </div>
+              <div *ngIf="customerName.errors?.['maxlength']">
+                Name must not exceed 20 characters.
+              </div>
+              <div *ngIf="customerName.errors?.['pattern']">
+                Name must not include special characters or numbers.
+              </div>
+            </div>
           </div>
           <div class="input-container">
             <textarea
@@ -45,6 +61,19 @@
               placeholder="Address"
               row="3"
             ></textarea>
+            <div
+              *ngIf="customerAddr.invalid && (customerAddr.dirty || customerAddr.touched)"
+              class="alert alert-danger"
+            >
+              <div *ngIf="customerAddr.errors?.['required']">Address is required.</div>
+              <div *ngIf="customerAddr.errors?.['minlength']">
+               Address must be atleast 10 charaters.
+              </div>
+              <div *ngIf="customerAddr.errors?.['maxlength']">
+                Address must not exceed 30 characters.
+              </div>
+              
+            </div>
           </div>
           <div class="input-container">
             <input
@@ -54,15 +83,25 @@
               id="email"
               placeholder="Email"
             />
+         
+            <div *ngIf="customerEmail.invalid && (customerEmail.dirty || customerEmail.touched)" class="alert alert-danger">  
+              <div *ngIf="customerEmail.errors.required">Email Address is required.</div>  
+              <div *ngIf="customerEmail.errors.email">Please, Enter valid Email Address.</div>  
+          </div>
           </div>
           <div class="input-container">
             <input
-              type="number"
+              type="tel"
               class="form-control"
               formControlName="customerPhno"
               id="contactNo"
               placeholder="Contact no"
+              
             />
+            <div *ngIf="customerPhno.invalid && (customerPhno.dirty || customerPhno.touched)" class="alert alert-danger">  
+              <div *ngIf="customerPhno.errors.required">Mobile Number is required.</div>  
+              <div *ngIf="customerPhno.errors.pattern">Please, Enter 10 digit Mobile Number only.</div>  
+          </div>
           </div>
           <div class="input-container">
             <input
@@ -72,6 +111,10 @@
               id="billDate"
               placeholder="billDate"
             />
+            <div *ngIf="billDate.invalid && (billDate.dirty || billDate.touched)" class="alert alert-danger">  
+              <div *ngIf="billDate.errors.required">Bill date is required</div>  
+               
+          </div>
           </div>
         </div>
       </div>
@@ -119,23 +162,30 @@
                     /> -->
                     <select
                       class="custom-select mb-3"
-                      (change)="changeProduct($event)"
-                      formControlName="productName"
+                      (change)="changeProduct($event,i)"
+                      formControlName="product"
+                     
                     >
                       <option value="">Select Product</option>
-                      <option *ngFor="let product of productList" [ngValue]="product.prodName">
+                      <option
+                        *ngFor="let product of productList"
+                        [ngValue]="product"
+                      >
                         {{ product.prodName }}
                         
                       </option>
                     </select>
+                    <!-- <div *ngIf="product.touched && product.invalid" class="alert alert-danger">  
+                      <div *ngIf="product.errors.required">Please select product</div>  
+                  </div>  -->
                   </td>
                   <td>
                     <input
-                      type="text"
+                      type="number"
                       class="form-control"
                       formControlName="productPrice"
-                      id="price" 
-                      #prodprice
+                      id="price"
+                      [value]="productPrice"
                     />
                   </td>
                   <td>
@@ -144,7 +194,7 @@
                       class="form-control"
                       formControlName="productQty"
                       id="quantity"
-                      #prodqty
+                      (change)="calculateAmount(i)"
                     />
                   </td>
                   <td>
@@ -155,7 +205,15 @@
                       id="amount"
                     #pro
                     /> -->
-                    <input class="form-control" formControlName="productAmount" [value]="invoiceForm.get('productQty')"/>
+                    <!-- {{productQty*productPrice}} -->
+
+                    <input
+                      class="form-control"
+                      type="number"
+                      formControlName="productAmount"
+                      name="productAmount"
+                    />
+                    <!-- {{productAmount[i]}} -->
                   </td>
                   <td>
                     <button class="btn" (click)="removeRow(i)">
@@ -235,6 +293,7 @@
           <button
             type="submit"
             class="btn btn-success"
+            
             (click)="postInvoiceDetails()"
           >
             Create Invoice
@@ -244,3 +303,4 @@
     </div>
   </div>
 </form>
+<!-- [disabled]="!invoiceForm.valid" -->
