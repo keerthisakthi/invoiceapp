@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import {
   FormArray,
   FormBuilder,
@@ -7,6 +7,7 @@ import {
   NgForm,
   Validators,
 } from '@angular/forms';
+import { Subscription } from 'rxjs';
 import { InvoiceService } from '../services/invoice.service';
 import { Invoice, Product } from './create-invoice.model';
 
@@ -16,13 +17,20 @@ import { Invoice, Product } from './create-invoice.model';
   styleUrls: ['./create-invoice.component.css'],
 })
 export class CreateInvoiceComponent implements OnInit {
+
   invoiceForm: FormGroup;
   Today: number = Date.now();
-  // productlist: any = ['Florida', 'South Dakota', 'Tennessee', 'Michigan'];
   productList:any;
-  // constructor(private fb: FormBuilder) {}
-  constructor( private invoiceService: InvoiceService) {
-    // console.log("in cons",this.invoiceModelObj.products[0].name);
+  subTot: number;
+  taxPercent:number=10;
+  taxVal:number;
+  netPrice:number;
+
+  // taxVal = this.subTot *(this.taxPercent/100);
+ 
+  
+  constructor( private invoiceService: InvoiceService,private ref: ChangeDetectorRef) {
+    
    }
   ngOnInit() {
     // this.createForm();
@@ -41,18 +49,35 @@ export class CreateInvoiceComponent implements OnInit {
           productAmount: new FormControl('', Validators.required)
         })
       ]),
-      netAmount: new FormControl(null,[Validators.required]),
-      subTotal: new FormControl(null ,[Validators.required]),
-      taxValue: new FormControl(null,[Validators.required])
+      netAmount: new FormControl(null),
+      subTotal: new FormControl(null),
+      taxValue: new FormControl(null)
       
     });
 
     this.invoiceService.getProductLists().subscribe(data => {
       this.productList = data;
-      console.log("productfood",this.productList)
-      console.log(this.productList[0].prodName)
+      // console.log("productfood",this.productList)
+      // console.log(this.productList[0].prodName)
   })
-  }
+  this.invoiceForm.controls['productArray'].valueChanges.subscribe(values => { 
+    this.subTot = 0;
+    const ctrl = <FormArray>this.invoiceForm.controls['productArray'];     
+      ctrl.controls.forEach(x => { 
+        this.subTot += x.get('productAmount')?.value;
+        this.taxVal = this.subTot *(this.taxPercent/100);
+        this.netPrice = this.subTot + this.taxVal;
+        this.ref.detectChanges();
+      });
+    }) 
+
+    this.invoiceForm.get('subTotal')?.setValue(this.subTot);
+
+
+}
+  
+  
+ 
   get customerName(){
     return this.invoiceForm.get('customerName') as FormControl
   }
@@ -80,11 +105,12 @@ export class CreateInvoiceComponent implements OnInit {
   get product(){
     return this.invoiceForm.get('product') as FormControl
   }
-  get productPrice() {
-
-    return this.invoiceForm.controls['productArray'].get('productPrice') as FormControl
+  
+  get productPrice(){
+    return this.invoiceForm.get('productPrice') as FormControl
     
   }
+
   get productQty(){
     return this.invoiceForm.get('productQty') as FormControl
     
@@ -108,14 +134,13 @@ export class CreateInvoiceComponent implements OnInit {
     
     control.push(
       new FormGroup({
-        //productName: new FormControl(''),
         product: new FormControl('',[Validators.required]),
         productPrice: new FormControl('',[Validators.required]),
         productQty: new FormControl('',[Validators.required]),
         productAmount: new FormControl('',[Validators.required])
       })
     );
-    // control.get('productPrice')?.setValue('240');
+    
   }
 
   removeRow(index: number) {
@@ -127,15 +152,13 @@ export class CreateInvoiceComponent implements OnInit {
     console.log(this.invoiceForm.value.customerName);
     console.log(this.invoiceForm.value.netAmount)
     console.log(this.invoiceForm)
-    // console.log("array",this.invoiceForm.value.productArray[0].productName)
-    // console.log("array",this.invoiceForm.value.productArray.length)
+    
   }
 
   postInvoiceDetails() {
-    // debugger;
-    // console.log("array",this.invoiceForm.value.productArray[0].productName)
-    // console.log("array",this.invoiceForm.value.productArray.length)
-    // console.log("happu",this.invoiceModelObj.products.name )
+    this.invoiceForm.value.subTotal=this.subTot;
+    this.invoiceForm.value.taxValue=this.taxVal;
+    this.invoiceForm.value.netAmount=this.netPrice;
     this.invoiceModelObj.customerName = this.invoiceForm.value.customerName;
     this.invoiceModelObj.address = this.invoiceForm.value.customerAddr;
     this.invoiceModelObj.contactNo = this.invoiceForm.value.customerPhno;
@@ -146,13 +169,9 @@ export class CreateInvoiceComponent implements OnInit {
     this.invoiceModelObj.billDate = this.invoiceForm.value.billDate;
     const itemLength = this.invoiceForm.value.productArray.length;
     const arr =this.invoiceForm.value.productArray;
-    // this.invoiceModelObj.products.length=itemLength;
-
-    // console.log("prod",this.invoiceModelObj.products.length)
-    // console.log("detail",arr,itemLength)
     
     for(let i=0; i<arr.length; i++){
-    //  debugger;
+   
       this.invoiceModelObj.products[i]= new Product(
         this.invoiceForm.value.productArray[i].product, 
         this.invoiceForm.value.productArray[i].productPrice, 
@@ -171,10 +190,12 @@ export class CreateInvoiceComponent implements OnInit {
   }
 
   changeProduct(e: any,index:number) {
-    console.log("price",e.target.value);
+    // console.log("price",e.target.value);
+    
     const priceValue=this.invoiceForm.value.productArray[index].product.price;
     const prodControl=(<FormArray>this.invoiceForm.controls['productArray']).at(index);
     prodControl.get('productPrice')?.setValue(priceValue);
+    this.calculateAmount(index);
     // this.invoiceForm.controls['productArray'].get('productPrice')?.setValue("20", {
     //     onlySelf: true,
     //   });
@@ -236,6 +257,9 @@ export class CreateInvoiceComponent implements OnInit {
     const total = this.invoiceForm.value.productArray[index].productPrice * this.invoiceForm.value.productArray[index].productQty;
     const amountControl=(<FormArray>this.invoiceForm.controls['productArray']).at(index);
     amountControl.get('productAmount')?.setValue(total);
+    
+    
+    // for(let i=index;i<)
     // const total = this.invoiceForm.value.productArray[index].productPrice * this.invoiceForm.value.productArray[index].productQty;
     //  this.invoiceForm.value.productArray[index].get('productAmount').setValue(total);
     // this.invoiceForm.controls['productArray'].value.productAmount.setValue(total);
@@ -247,8 +271,6 @@ export class CreateInvoiceComponent implements OnInit {
     // console.log("v",total,this.invoiceForm
     // .get('productQty')?.value)
   }
+ 
   
 }
-// (this.form.get('controls') as FormArray).at(index) as FormGroup).get('description').patchValue(item.description);
-// this.invoiceForm.controls['productArray'].value
-// this.invoiceForm.controls['productArray'].controls[0].value.productPrice=this.invoiceForm.controls['productArray'].controls[0].value.product.price

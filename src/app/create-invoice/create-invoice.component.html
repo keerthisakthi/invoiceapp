@@ -140,7 +140,7 @@
                   <th width="25%">Price</th>
                   <th width="25%">Quantity</th>
                   <th width="25%">Amount</th>
-                  <th width="25%">action</th>
+                  <th width="25%">Action</th>
                 </tr>
               </thead>
 
@@ -153,13 +153,7 @@
               >
                 <tr>
                   <td>
-                    <!-- <input
-                      type="text"
-                      class="form-control"
-                      id="productname"
-                      formControlName="productName"
-                      required
-                    /> -->
+                    
                     <select
                       class="custom-select mb-3"
                       (change)="changeProduct($event,i)"
@@ -186,6 +180,8 @@
                       formControlName="productPrice"
                       id="price"
                       [value]="productPrice"
+                      readonly
+                      
                     />
                   </td>
                   <td>
@@ -197,23 +193,15 @@
                       (change)="calculateAmount(i)"
                     />
                   </td>
-                  <td>
-                    <!-- <input
-                      type="number"
-                      class="form-control"
-                      formControlName="productAmount"
-                      id="amount"
-                    #pro
-                    /> -->
-                    <!-- {{productQty*productPrice}} -->
-
+                  <td >
                     <input
                       class="form-control"
                       type="number"
                       formControlName="productAmount"
                       name="productAmount"
+                      readonly
                     />
-                    <!-- {{productAmount[i]}} -->
+                   
                   </td>
                   <td>
                     <button class="btn" (click)="removeRow(i)">
@@ -257,6 +245,9 @@
                     class="form-control"
                     formControlName="subTotal"
                     id="subtotal"
+                    [value]="subTot"
+                    readonly
+
                   />
                 </td>
               </tr>
@@ -271,6 +262,8 @@
                     class="form-control"
                     formControlName="taxValue"
                     id="taxValue"
+                    [value]="taxVal"
+                    readonly
                   />
                 </td>
               </tr>
@@ -285,6 +278,8 @@
                       class="form-control"
                       formControlName="netAmount"
                       id="netAmount"
+                      [value]="netPrice"
+                      readonly
                   /></strong>
                 </td>
               </tr>
@@ -293,9 +288,8 @@
           <button
             type="submit"
             class="btn btn-success"
-            
-            (click)="postInvoiceDetails()"
-          >
+            [disabled]="!invoiceForm.valid"
+            (click)="postInvoiceDetails()">
             Create Invoice
           </button>
         </div>
@@ -303,4 +297,3 @@
     </div>
   </div>
 </form>
-<!-- [disabled]="!invoiceForm.valid" -->
