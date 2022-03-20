@@ -1,16 +1,8 @@
 <form [formGroup]="invoiceForm" (ngSubmit)="onSubmit()">
   <div class="card">
     <div class="card-header">
-      <strong>Invoice</strong>
-      <!-- <strong>B123</strong> -->
-      <a
-        class="btn btn-sm btn-secondary float-right mr-1 d-print-none"
-        href="#"
-        onclick="javascript:window.print();"
-        data-abc="true"
-      >
-        <i class="fa fa-print"></i> Print</a
-      >
+      <strong>INVOICE</strong>
+     
     </div>
     <div class="card-body">
       <div class="row mb-4">
@@ -35,13 +27,19 @@
               formControlName="customerName"
               id="name"
               placeholder="Customer name"
+              [readonly]="mode == 'view' ? true : false"
             />
-            
+
             <div
-              *ngIf="customerName.invalid && (customerName.dirty || customerName.touched)"
+              *ngIf="
+                customerName.invalid &&
+                (customerName.dirty || customerName.touched)
+              "
               class="alert alert-danger"
             >
-              <div *ngIf="customerName.errors?.['required']">Name is required.</div>
+              <div *ngIf="customerName.errors?.['required']">
+                Name is required.
+              </div>
               <div *ngIf="customerName.errors?.['minlength']">
                 Name must be at least 8 characters long.
               </div>
@@ -60,19 +58,24 @@
               id="address"
               placeholder="Address"
               row="3"
+              [readonly]="mode == 'view' ? true : false"
             ></textarea>
             <div
-              *ngIf="customerAddr.invalid && (customerAddr.dirty || customerAddr.touched)"
+              *ngIf="
+                customerAddr.invalid &&
+                (customerAddr.dirty || customerAddr.touched)
+              "
               class="alert alert-danger"
             >
-              <div *ngIf="customerAddr.errors?.['required']">Address is required.</div>
+              <div *ngIf="customerAddr.errors?.['required']">
+                Address is required.
+              </div>
               <div *ngIf="customerAddr.errors?.['minlength']">
-               Address must be atleast 10 charaters.
+                Address must be atleast 10 charaters.
               </div>
               <div *ngIf="customerAddr.errors?.['maxlength']">
-                Address must not exceed 30 characters.
+                Address must not exceed 50 characters.
               </div>
-              
             </div>
           </div>
           <div class="input-container">
@@ -82,12 +85,23 @@
               formControlName="customerEmail"
               id="email"
               placeholder="Email"
+              [readonly]="mode == 'view' ? true : false"
             />
-         
-            <div *ngIf="customerEmail.invalid && (customerEmail.dirty || customerEmail.touched)" class="alert alert-danger">  
-              <div *ngIf="customerEmail.errors.required">Email Address is required.</div>  
-              <div *ngIf="customerEmail.errors.email">Please, Enter valid Email Address.</div>  
-          </div>
+
+            <div
+              *ngIf="
+                customerEmail.invalid &&
+                (customerEmail.dirty || customerEmail.touched)
+              "
+              class="alert alert-danger"
+            >
+              <div *ngIf="customerEmail.errors.required">
+                Email Address is required.
+              </div>
+              <div *ngIf="customerEmail.errors.email">
+                Please, Enter valid Email Address.
+              </div>
+            </div>
           </div>
           <div class="input-container">
             <input
@@ -96,12 +110,22 @@
               formControlName="customerPhno"
               id="contactNo"
               placeholder="Contact no"
-              
+              [readonly]="mode == 'view' ? true : false"
             />
-            <div *ngIf="customerPhno.invalid && (customerPhno.dirty || customerPhno.touched)" class="alert alert-danger">  
-              <div *ngIf="customerPhno.errors.required">Mobile Number is required.</div>  
-              <div *ngIf="customerPhno.errors.pattern">Please, Enter 10 digit Mobile Number only.</div>  
-          </div>
+            <div
+              *ngIf="
+                customerPhno.invalid &&
+                (customerPhno.dirty || customerPhno.touched)
+              "
+              class="alert alert-danger"
+            >
+              <div *ngIf="customerPhno.errors.required">
+                Mobile Number is required.
+              </div>
+              <div *ngIf="customerPhno.errors.pattern">
+                Please, Enter 10 digit Mobile Number only.
+              </div>
+            </div>
           </div>
           <div class="input-container">
             <input
@@ -110,11 +134,14 @@
               formControlName="billDate"
               id="billDate"
               placeholder="billDate"
+              [readonly]="mode == 'view' ? true : false"
             />
-            <div *ngIf="billDate.invalid && (billDate.dirty || billDate.touched)" class="alert alert-danger">  
-              <div *ngIf="billDate.errors.required">Bill date is required</div>  
-               
-          </div>
+            <div
+              *ngIf="billDate.invalid && (billDate.dirty || billDate.touched)"
+              class="alert alert-danger"
+            >
+              <div *ngIf="billDate.errors.required">Bill date is required</div>
+            </div>
           </div>
         </div>
       </div>
@@ -127,6 +154,7 @@
               type="button"
               class="btn btn-secondary"
               (click)="addProduct()"
+              [disabled]="mode == 'view' ? true : false"
             >
               +
             </button>
@@ -136,7 +164,7 @@
             <table class="table table-responsive-sm">
               <thead>
                 <tr>
-                  <th width="25%">Product</th>
+                  <th width="25%">Item</th>
                   <th width="25%">Price</th>
                   <th width="25%">Quantity</th>
                   <th width="25%">Amount</th>
@@ -153,25 +181,19 @@
               >
                 <tr>
                   <td>
-                    
                     <select
                       class="custom-select mb-3"
-                      (change)="changeProduct($event,i)"
+                      (change)="changeProduct($event, i)"
                       formControlName="product"
-                     
                     >
-                      <option value="">Select Product</option>
+                      <option value="">Select Item</option>
                       <option
                         *ngFor="let product of productList"
                         [ngValue]="product"
                       >
                         {{ product.prodName }}
-                        
                       </option>
                     </select>
-                    <!-- <div *ngIf="product.touched && product.invalid" class="alert alert-danger">  
-                      <div *ngIf="product.errors.required">Please select product</div>  
-                  </div>  -->
                   </td>
                   <td>
                     <input
@@ -180,8 +202,7 @@
                       formControlName="productPrice"
                       id="price"
                       [value]="productPrice"
-                      readonly
-                      
+                      [readonly]="true"
                     />
                   </td>
                   <td>
@@ -191,9 +212,10 @@
                       formControlName="productQty"
                       id="quantity"
                       (change)="calculateAmount(i)"
+                      [readonly]="mode == 'view' ? true : false"
                     />
                   </td>
-                  <td >
+                  <td>
                     <input
                       class="form-control"
                       type="number"
@@ -201,10 +223,13 @@
                       name="productAmount"
                       readonly
                     />
-                   
                   </td>
                   <td>
-                    <button class="btn" (click)="removeRow(i)">
+                    <button
+                      class="btn"
+                      (click)="removeRow(i)"
+                      [disabled]="mode == 'view' ? true : false"
+                    >
                       <svg
                         viewBox="0 0 24 24"
                         width="24"
@@ -247,7 +272,6 @@
                     id="subtotal"
                     [value]="subTot"
                     readonly
-
                   />
                 </td>
               </tr>
@@ -286,11 +310,22 @@
             </tbody>
           </table>
           <button
+            *ngIf="mode == 'new'"
             type="submit"
             class="btn btn-success"
             [disabled]="!invoiceForm.valid"
-            (click)="postInvoiceDetails()">
+            (click)="postInvoiceDetails()"
+          >
             Create Invoice
+          </button>
+          <button
+            *ngIf="mode == 'edit'"
+            type="submit"
+            class="btn btn-success"
+            [disabled]="!invoiceForm.valid"
+            (click)="updateInvoiceDetails()"
+          >
+            Update Invoice
           </button>
         </div>
       </div>

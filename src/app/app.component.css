@@ -56,3 +56,10 @@ margin-right: 0.5rem;
 .sidebar .nav-link:hover .feather, .sidebar .nav-link.active .feather {
     color: inherit;
 }
+
+@media (max-width: 576px) { 
+    .sidebar-sticky{
+        height: 100px!important;
+        background-color: #6c757d;
+    }
+ }

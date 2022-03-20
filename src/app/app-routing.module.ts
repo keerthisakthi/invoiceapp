@@ -10,6 +10,8 @@ const routes: Routes =[
   {path:'',component: CreateInvoiceComponent},
   {path:'create-invoice',component: CreateInvoiceComponent},
   {path:'list-invoice',component: ListInvoiceComponent},
+  {path:'edit/:mode/:id',component: CreateInvoiceComponent},
+  {path:'view/:mode/:id',component: CreateInvoiceComponent}
 ];
 @NgModule({
   declarations: [],
