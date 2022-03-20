@@ -8,9 +8,16 @@
     box-shadow: none;
 }
 .action-td{
-    width: 10%;
+    width: 12%;
 }
 
 table {
   width: 100%;
+}
+@media (min-width: 576px)
+{
+.modal-dialog {
+  max-width: 720px;
+  margin: 1.75rem auto;
+}
 }

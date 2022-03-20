@@ -29,9 +29,9 @@
 .input-container{
     padding: 3px 0;
 }
-.input-container input{
+/* .input-container input{
     border: 0px;
-}
+} */
 .input-container .billDate{
     color:grey;
 }

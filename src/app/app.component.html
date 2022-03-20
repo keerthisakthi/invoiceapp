@@ -1,48 +1,94 @@
 <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
-    <a class="navbar-brand p-2">
-      Keerthi Restaurant
+  <a class="navbar-brand p-2">
+    <i>Keerthi Restaurant</i>
+  </a>
+  <div class="btn-group p-2">
+    <a
+      type="button"
+      class="dropdown-toggle"
+      data-toggle="dropdown"
+      aria-haspopup="true"
+      aria-expanded="false"
+    >
+      <img
+        class="img-cirlce"
+        width="30"
+        height="30"
+        class="rounded-circle"
+        src="../assets/keerthi.jpg"
+      />
     </a>
-    <div class="btn-group p-2">
-        <a type="button" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <img class ="img-cirlce"  width="30" height="30" class="rounded-circle" src="../assets/keerthi.jpg">
-            
-        </a>
-        <div class="dropdown-menu dropdown-menu-right admin">
-          <a class="dropdown-item" type="button"><i class="bi bi-gear"></i>Settings</a>
-          <a class="dropdown-item" type="button"><i class="bi bi-chat-square"></i>Contact Us</a>
-          <a class="dropdown-item" type="button"><i class="bi bi-power"></i>Logout</a>
-        </div>
-      </div>
- 
-  </nav>
-
-  <div class="container-fluid">
-    <div class="row">
-      <nav class="col-md-2 col-2 d-none d-md-block bg-light sidebar">
-        <div class="sidebar-sticky">
-          <ul class="nav flex-column">
-            <li class="nav-item">
-                <a class="nav-link" routerLink="/create-invoice">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline></svg>
-                  Create Invoice<span class="sr-only">(current)</span>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" routerLink="/list-invoice">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-list"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
-                  List Invoices
-                </a>
-              </li>
-           
-          </ul>
-
-        </div>
-      </nav>
-
-      <main role="main" class="col-md-9 col-9 ml-sm-auto col-lg-10 pt-3 px-4">
-        <router-outlet></router-outlet>
-      </main>
+    <div class="dropdown-menu dropdown-menu-right admin">
+      <a class="dropdown-item" type="button"
+        ><i class="bi bi-gear"></i>Settings</a
+      >
+      <a class="dropdown-item" type="button"
+        ><i class="bi bi-chat-square"></i>Contact Us</a
+      >
+      <a class="dropdown-item" type="button"
+        ><i class="bi bi-power"></i>Logout</a
+      >
     </div>
   </div>
-  
-  
+</nav>
+
+<div class="container-fluid">
+  <div class="row">
+    <nav class="col-sm-2 bg-light sidebar">
+      <div class="sidebar-sticky">
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/create-invoice">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="feather feather-file"
+              >
+                <path
+                  d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"
+                ></path>
+                <polyline points="13 2 13 9 20 9"></polyline>
+              </svg>
+              Create Invoice<span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/list-invoice">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="feather feather-list"
+              >
+                <line x1="8" y1="6" x2="21" y2="6" />
+                <line x1="8" y1="12" x2="21" y2="12" />
+                <line x1="8" y1="18" x2="21" y2="18" />
+                <line x1="3" y1="6" x2="3.01" y2="6" />
+                <line x1="3" y1="12" x2="3.01" y2="12" />
+                <line x1="3" y1="18" x2="3.01" y2="18" />
+              </svg>
+              List Invoices
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <main role="main" class="col-sm-10 pt-2">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+</div>
